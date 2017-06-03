@@ -3,25 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SinOscillator : MonoBehaviour, mono
+public class SinOscillator : Oscillator
 {
-
-    float currentPos;
-
-    public Component frequency;
-
-    public float[] getSignal(int length)
+    public override float waveFunction(float position)
     {
-        float[] fill = new float[length];
-
-        float[] freqs = ((mono)frequency).getSignal(length);
-        for (int i=0; i<length; i++)
-        {
-            currentPos += freqs[i] / info.sampleRate * 2 * Mathf.PI;
-            fill[i] = Mathf.Sin(currentPos);
-        }
-        while (currentPos > Mathf.PI * 2) { currentPos -= Mathf.PI*2; }
-        while (currentPos < -Mathf.PI * 2) { currentPos += Mathf.PI*2; }
-        return fill;
+        return Mathf.Sin(2 * Mathf.PI * position);
     }
 }
