@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RangeShifter : MonoBehaviour, mono {
 
-    public SinOscillator input;
+    public Component input;
     public float sourceMin = -1f;
     public float sourceMax = 1f;
     public float outMin = 0f;
@@ -13,7 +13,7 @@ public class RangeShifter : MonoBehaviour, mono {
     public float[] getSignal(int length)
     {
         float[] fill = new float[length];
-        float[] datt = input.getSignal(length);
+        float[] datt = ((mono)input).getSignal(length);
         for (int i = 0; i < datt.Length; i++)
         {
             fill[i] = (datt[i] - sourceMin) / (sourceMax - sourceMin) * (outMax - outMin) + outMin;

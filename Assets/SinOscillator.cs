@@ -20,6 +20,8 @@ public class SinOscillator : MonoBehaviour, mono
             currentPos += freqs[i] / info.sampleRate * 2 * Mathf.PI;
             fill[i] = Mathf.Sin(currentPos);
         }
+        while (currentPos > Mathf.PI * 2) { currentPos -= Mathf.PI*2; }
+        while (currentPos < -Mathf.PI * 2) { currentPos += Mathf.PI*2; }
         return fill;
     }
 }

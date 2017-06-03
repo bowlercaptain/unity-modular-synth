@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class AudioOut : MonoBehaviour {
 
-    public SinOscillator input;
+    public Component input;
+    private mono inputMono
+    {
+        get { return (mono)input; }
+        set { input = (Component)value; Debug.Log("please tell Robert why you just did this, I could not come up with a use case but put it in place anyway"); }
+    }
 
     private void OnAudioFilterRead(float[] data, int channels)
     {
@@ -15,7 +20,7 @@ public class AudioOut : MonoBehaviour {
         //{
 
         //}
-        var datta = input.getSignal(data.Length / channels);
+        var datta = inputMono.getSignal(data.Length / channels);
         for(int i = 0; i < data.Length/channels; i++)
         {
             for (int j = 0; j < channels; j++)
@@ -23,7 +28,6 @@ public class AudioOut : MonoBehaviour {
                 data[i * channels + j]=datta[i];
             }
         }
-        Debug.Log(datta[0]);
     }
 
     public void Awake()
