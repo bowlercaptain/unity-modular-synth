@@ -23,7 +23,7 @@ public class knobOutput : MonoBehaviour, mono {
     {
         if (channel == this.channel && knobNumber == this.knobNumber)
         {
-            knobValue = this.knobValue;
+            this.knobValue = knobValue;
         }
     }
 
