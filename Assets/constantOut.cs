@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class constantOut : MonoBehaviour, mono {
 
-    public float valll;
+    public float value;
     public float[] getSignal(int length)
     {
         float[] fill = new float[length];
         
         for(int i = 0; i < length; i++)
         {
-            fill[i] = valll;
+            fill[i] = value;
         }
         return fill;
     }

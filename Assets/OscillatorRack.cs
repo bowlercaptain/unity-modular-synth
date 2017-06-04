@@ -13,9 +13,6 @@ public class OscillatorRack : MonoBehaviour
 
 	public AddAndLevel mixer;
 
-	public Component volumeSource;
-	public constantOut silenceSource;
-
 
 	private void Awake()
 	{
@@ -30,15 +27,6 @@ public class OscillatorRack : MonoBehaviour
 		{
 			mixer = gameObject.AddComponent<AddAndLevel>();
 			mixer.levelMode = AddAndLevel.LevelMode.clip;
-		}
-		if (volumeSource == null)
-		{
-			volumeSource = gameObject.AddComponent<constantOut>();
-			((constantOut)volumeSource).valll = .25f;//safe default? Or else could go 1 and set the mixer to safeLevel
-		}
-		if (silenceSource == null)
-		{
-			gameObject.AddComponent<constantOut>();//default val will be 0.
 		}
 	}
 
@@ -55,6 +43,9 @@ public class OscillatorRack : MonoBehaviour
 
 	void NoteOn(MidiChannel channel, int note, float velocity)
 	{
+		if (channel != this.channel) {
+			return;
+		}
 		Debug.Log("NoteOn: " + channel + "," + note + "," + velocity);
 		var osc = GetFreeOsc();
 		var bridge = osc.GetComponent<InBridge>();
@@ -62,11 +53,23 @@ public class OscillatorRack : MonoBehaviour
 		bridge.vol = velocity;
 
 		playingOscillators[note] = osc;
+		var temp = new List<Component>(mixer.inputs); //it is dumb Unity can't inspect Lists without a custom editor
+		temp.Add(osc.GetComponent<OutBridge>());
+		mixer.inputs = temp.ToArray();//WET FLOOR: this code is bad and I feel bad. But the fix is to dupe AddAndLevel using a List<> instead of an array, write a custom inspector (not actually that hard), or pull out "bundle of inputs" and make mixer take that instead of having its own collection, then have one of those with an array and one with a list. Fixes without taking either step, but will be confusing to work with unless we bury all these components behind the scenes. "bridge" is already pretty sketch.
 	}
 
 	void NoteOff(MidiChannel channel, int note)
 	{
+		if(this.channel != channel) {
+			return;
+		}
 		Debug.Log("NoteOff: " + channel + "," + note);
+		var osc = playingOscillators[note];
+		playingOscillators.Remove(note);
+		unusedOscillators.Push(osc);
+		var temp = new List<Component>(mixer.inputs);
+		temp.Remove(osc.GetComponent<OutBridge>());
+		mixer.inputs = temp.ToArray();
 	}
 
 	void OnEnable()

@@ -11,7 +11,7 @@ public abstract class Oscillator : MonoBehaviour, mono {
         if (volume == null)
         {
             volume = gameObject.AddComponent<constantOut>();
-            ((constantOut)volume).valll = 1;
+            ((constantOut)volume).value = 1;
         }
     }
 

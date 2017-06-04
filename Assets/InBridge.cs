@@ -5,10 +5,10 @@ using UnityEngine;
 public class InBridge : MonoBehaviour {
 	public constantOut frequency;
 public float freq {
-	set { frequency.valll = value; }
+	set { frequency.value = value; }
 }
 	public constantOut volume;
 public float vol {
-	set { volume.valll = value; }
+	set { volume.value = value; }
 }
 }
