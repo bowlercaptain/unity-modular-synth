@@ -10,7 +10,8 @@ public class AddAndLevel : MonoBehaviour, mono {
     {
         safeLevel,
         clip,
-        capLevel
+        capLevel,
+        dontLevel
     }
 
     private float capValue;
@@ -43,6 +44,8 @@ public class AddAndLevel : MonoBehaviour, mono {
                 case LevelMode.capLevel:
                     if (Mathf.Abs(sample) > capValue){ capValue = Mathf.Abs(sample); }
                     sample /= capValue;
+                    break;
+                case LevelMode.dontLevel:
                     break;
                 default:
                     throw new System.NotImplementedException("That's not a level mode yet, you need to actually write code for this");         
