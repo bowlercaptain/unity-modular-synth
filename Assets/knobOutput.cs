@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using MidiJack;
 
-public class knobOutput : MonoBehaviour, mono {
+public class knobOutput : mono {
 
     public MidiChannel channel;
     public int knobNumber;
     float knobValue;
 
-    public float[] getSignal(int length)
+    public override float[] getSignal(int length)
     {
-        float[] fill = new float[length];
+        fill = new float[length];
         for (int i = 0; i < length; i++)
         {
             fill[i] = knobValue;

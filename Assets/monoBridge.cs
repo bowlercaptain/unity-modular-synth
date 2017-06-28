@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class monoBridge : MonoBehaviour, mono
+public class monoBridge : mono
 {
-	public Component source;
-	public float[] getSignal(int length)
+	public mono source;
+	public override float[] getSignal(int length)
 	{
-		return ((mono)source).getSignal(length);
+		fill = ((mono)source).getSignal(length);
+		return fill;
 	}
 }

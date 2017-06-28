@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface mono {
+public abstract class mono : MonoBehaviour {
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="length"></param>
-    /// <returns>A float array </returns>
-    float[] getSignal(int length);
+	public float[] fill = new float[1024];
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="length"></param>
+	/// <returns>A float array </returns>
+	abstract public float[] getSignal(int length);
 
 }

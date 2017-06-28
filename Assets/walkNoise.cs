@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class walkNoise : MonoBehaviour, mono {
+public class walkNoise : mono {
 
-    public Component width;
+    public mono width;
 
-	public Component volume;
+	public mono volume;
 
 	private void Awake()
 	{
@@ -21,9 +21,9 @@ public class walkNoise : MonoBehaviour, mono {
 
     private System.Random mr = new System.Random();
 
-    public float[] getSignal(int length)
+    public override float[] getSignal(int length)
     {
-        float[] fill = new float[length];
+        fill = new float[length];
 
         float[] widths = ((mono)width).getSignal(length);
 		float[] vols = ((mono)volume).getSignal(length);

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class constantOut : MonoBehaviour, mono {
+public class constantOut :  mono {
 
     public float value;
-    public float[] getSignal(int length)
+    public override float[] getSignal(int length)
     {
-        float[] fill = new float[length];
+        fill = new float[length];
         
         for(int i = 0; i < length; i++)
         {

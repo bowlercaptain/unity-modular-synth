@@ -13,7 +13,6 @@ public class OscillatorRack : MonoBehaviour
 
 	public AddAndLevel mixer;
 
-
 	private void Awake()
 	{
 		if (oscPrefab == null)
@@ -21,7 +20,12 @@ public class OscillatorRack : MonoBehaviour
 			var ggg = new GameObject();
 			var innn = ggg.AddComponent<InBridge>();
 			var osc = ggg.AddComponent<SinOscillator>();
-			osc.frequency = innn;
+			innn.frequency = ggg.AddComponent<constantOut>();
+			innn.volume = ggg.AddComponent<constantOut>();
+			osc.frequency = innn.frequency;
+			osc.volume = innn.volume;
+			var ouuu = ggg.AddComponent<OutBridge>();
+			ouuu.source = osc;
 		}
 		if (mixer == null)
 		{
@@ -40,7 +44,7 @@ public class OscillatorRack : MonoBehaviour
 		{
 			Debug.Log("new osc");
 			var osc = Instantiate(oscPrefab);
-			var temp = new List<Component>(mixer.inputs); //it is dumb Unity can't inspect Lists without a custom editor
+			var temp = new List<mono>(mixer.inputs); //it is dumb Unity can't inspect Lists without a custom editor
 			temp.Add(osc.GetComponent<OutBridge>());
 			mixer.inputs = temp.ToArray();//WET FLOOR: this code is bad and I feel bad. But the fix is to dupe AddAndLevel using a List<> instead of an array, write a custom inspector (not actually that hard), or pull out "bundle of inputs" and make mixer take that instead of having its own collection, then have one of those with an array and one with a list. Fixes without taking either step, but will be confusing to work with unless we bury all these components behind the scenes. "bridge" is already pretty sketch.
 			return osc;
@@ -65,7 +69,7 @@ public class OscillatorRack : MonoBehaviour
 
 		playingOscillators[note] = osc;
 		
-		//var temp = new List<Component>(mixer.inputs); //it is dumb Unity can't inspect Lists without a custom editor
+		//var temp = new List<mono>(mixer.inputs); //it is dumb Unity can't inspect Lists without a custom editor
 		//temp.Add(osc.GetComponent<OutBridge>());
 		//mixer.inputs = temp.ToArray();//WET FLOOR: this code is bad and I feel bad. But the fix is to dupe AddAndLevel using a List<> instead of an array, write a custom inspector (not actually that hard), or pull out "bundle of inputs" and make mixer take that instead of having its own collection, then have one of those with an array and one with a list. Fixes without taking either step, but will be confusing to work with unless we bury all these components behind the scenes. "bridge" is already pretty sketch.
 	}
@@ -81,7 +85,7 @@ public class OscillatorRack : MonoBehaviour
 		unusedOscillators.Push(osc);
 		var bridge = osc.GetComponent<InBridge>();
 		bridge.vol = 0f;
-		//var temp = new List<Component>(mixer.inputs);
+		//var temp = new List<mono>(mixer.inputs);
 		//temp.Remove(osc.GetComponent<OutBridge>());
 		//mixer.inputs = temp.ToArray();
 	}

@@ -3,17 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class dependentShifter : MonoBehaviour, mono {
+public class dependentShifter :  mono {
 
-	public Component input;
-	public Component sourceMin;
-	public Component sourceMax;
-	public Component outMin;
-	public Component outMax;
+	public mono input;
+	public mono sourceMin;
+	public mono sourceMax;
+	public mono outMin;
+	public mono outMax;
 
-public float[] getSignal(int length)
+public override float[] getSignal(int length)
 	{
-		float[] fill = new float[length];
+		fill = new float[length];
 		float[] datt = ((mono)input).getSignal(length);
 		float[] inmins = ((mono)sourceMin).getSignal(length);
 		float[] inmaxs = ((mono)sourceMax).getSignal(length);

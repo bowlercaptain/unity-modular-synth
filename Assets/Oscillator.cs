@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Oscillator : MonoBehaviour, mono {
+public abstract class Oscillator : mono {
 
     public abstract float waveFunction(float position);
 
@@ -10,21 +10,27 @@ public abstract class Oscillator : MonoBehaviour, mono {
     {
         if (volume == null)
         {
+			Debug.Log("Adding a volume input for your convenience.");
             volume = gameObject.AddComponent<constantOut>();
             ((constantOut)volume).value = 1;
         }
+		if(frequency==null) {
+			Debug.Log("Adding a frequency input for your convenience.");
+			frequency = gameObject.AddComponent<constantOut>();
+			((constantOut)frequency).value = 0;
+		}
     }
 
     float currentPos;
 
-    public Component frequency;
+    public mono frequency;
 
-    public Component volume;
+    public mono volume;
 
-    public float[] getSignal(int length)
+    public override float[] getSignal(int length)
     {
 
-        float[] fill = new float[length];
+         fill = new float[length];
 
         float[] freqs = ((mono)frequency).getSignal(length);
         float[] vols = ((mono)volume).getSignal(length);
