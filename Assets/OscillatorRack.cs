@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class OscillatorRack : MonoBehaviour
 {
 
-	public MidiChannel channel;
+	public NoteControl controller;
 
 	private Stack<GameObject> unusedOscillators = new Stack<GameObject>();
 	private Dictionary<int, GameObject> playingOscillators = new Dictionary<int, GameObject>();
@@ -51,17 +51,13 @@ public class OscillatorRack : MonoBehaviour
 		}
 	}
 
-	void NoteOn(MidiChannel channel, int note, float velocity)
+	void NoteOn( int note, float velocity)
 	{
 		if (velocity == 0f)
 		{
 			//NoteOff(channel, note);
 			return;//my keyboard is weird. Is this normal? Note on at 0 and then off?
 		}
-		if (channel != this.channel) {
-			return;
-		}
-		Debug.Log("NoteOn: " + channel + "," + note + "," + velocity);
 		var osc = GetFreeOsc();
 		var bridge = osc.GetComponent<InBridge>();
 		bridge.freq = MidiNoteToFrequency(note);
@@ -74,12 +70,8 @@ public class OscillatorRack : MonoBehaviour
 		//mixer.inputs = temp.ToArray();//WET FLOOR: this code is bad and I feel bad. But the fix is to dupe AddAndLevel using a List<> instead of an array, write a custom inspector (not actually that hard), or pull out "bundle of inputs" and make mixer take that instead of having its own collection, then have one of those with an array and one with a list. Fixes without taking either step, but will be confusing to work with unless we bury all these components behind the scenes. "bridge" is already pretty sketch.
 	}
 
-	void NoteOff(MidiChannel channel, int note)
+	void NoteOff( int note)
 	{
-		if(this.channel != channel) {
-			return;
-		}
-		Debug.Log("NoteOff: " + channel + "," + note);
 		var osc = playingOscillators[note];
 		playingOscillators.Remove(note);
 		unusedOscillators.Push(osc);
@@ -92,14 +84,14 @@ public class OscillatorRack : MonoBehaviour
 
 	void OnEnable()
 	{
-		MidiMaster.noteOnDelegate += NoteOn;
-		MidiMaster.noteOffDelegate += NoteOff;
+		controller.noteOn += NoteOn;
+		controller.noteOff += NoteOff;
 	}
 
 	void OnDisable()
 	{
-		MidiMaster.noteOnDelegate -= NoteOn;
-		MidiMaster.noteOffDelegate -= NoteOff;
+		controller.noteOn -= NoteOn;
+		controller.noteOff -= NoteOff;
 	}
 
 	static float MidiNoteToFrequency(int note)

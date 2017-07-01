@@ -5,7 +5,7 @@ using UnityEngine;
 public class InBridge : MonoBehaviour {
 	public constantOut frequency;
 public float freq {
-	set { frequency.value = value; }
+	set { frequency.value = value; }//null check this cuz fuck
 }
 	public constantOut volume;
 public float vol {

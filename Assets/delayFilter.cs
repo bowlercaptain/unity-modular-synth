@@ -32,6 +32,7 @@ public class delayFilter : mono
 	public float fuckSample(float sample)
 	{
 		sample += tape[j] * wetDry;
+		if(float.IsNaN(sample)) { sample = 0; }
 		tape[j] = sample;
 		j++;
 		if (j >= tape.Length) { j = 0; }

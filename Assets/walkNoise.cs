@@ -25,8 +25,8 @@ public class walkNoise : mono {
     {
         fill = new float[length];
 
-        float[] widths = ((mono)width).getSignal(length);
-		float[] vols = ((mono)volume).getSignal(length);
+        float[] widths = width.getSignal(length);
+		float[] vols = volume.getSignal(length);
 
         for (int i = 0; i < length; i++)
         {
