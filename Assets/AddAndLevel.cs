@@ -5,8 +5,6 @@ using UnityEngine;
 public class AddAndLevel : mono
 {
 
-	private int minSamples = 100000;
-	private int maxSamples = 0;
 
 
 	public mono[] inputs;
@@ -21,14 +19,13 @@ public class AddAndLevel : mono
 		dontLevel
 	}
 
-	private float capValue;
+	private float capValue = .01f;
 
 	public LevelMode levelMode = LevelMode.safeLevel;
 
 	public override float[] getSignal(int length)
 	{
-		minSamples = Mathf.Min(length, minSamples);
-		maxSamples = Mathf.Max(length, maxSamples);
+
 		fill = new float[length];
 		float[][] sources = new float[inputs.Length][];
 		for (int i = 0; i < inputs.Length; i++)
@@ -45,7 +42,7 @@ public class AddAndLevel : mono
 			switch (levelMode)
 			{
 				case LevelMode.safeLevel:
-					sample /= (float)inputs.Length;
+					sample /= Mathf.Min((float)inputs.Length,1);
 					break;
 				case LevelMode.clip:
 					sample = Mathf.Clamp(sample, -1f, 1f);

@@ -7,11 +7,10 @@ public class knobOutput : mono {
 
     public MidiChannel channel;
     public int knobNumber;
-    float knobValue;
+    float knobValue = .5f;
 
     public override float[] getSignal(int length)
     {
-        fill = new float[length];
         for (int i = 0; i < length; i++)
         {
             fill[i] = knobValue;
@@ -25,6 +24,7 @@ public class knobOutput : mono {
         {
             this.knobValue = knobValue;
         }
+		Debug.Log("Yoo " + knobValue +" "+ knobNumber + " " +  channel);
     }
 
     private void OnEnable()
