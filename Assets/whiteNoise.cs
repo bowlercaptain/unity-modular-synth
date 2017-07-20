@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class whiteNoise : mono {
 
-    private System.Random mr = new System.Random();
+
+	public mono volume;
+
+	private System.Random mr = new System.Random();
 
 public override float[] getSignal(int length)
     {
         fill = new float[length];
+		float[] vols = volume.getSignal(length);
 
         for (int i = 0; i < length; i++)
         {
 
-            fill[i] = (float)mr.NextDouble()*2f-1f;
+            fill[i] = vols[i]*(float)mr.NextDouble()*2f-1f;
         }
         return fill;
     }
