@@ -38,7 +38,6 @@ public class OscillatorRack : MonoBehaviour
 	{
 		if (unusedOscillators.Count > 0)
 		{
-			Debug.Log("osc exists");
 			return unusedOscillators.Pop();
 		} else
 		{
