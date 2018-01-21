@@ -7,8 +7,7 @@ public class gameControllerKnobOut : mono {
 	public string axisName;
 	float knobValue = .5f;
 
-	public override float[] getSignal(int length)
-	{
+	public override float[] getSignal(List<bool[]> doneBoxes, int length) {
 		for (int i = 0; i < length; i++)
 		{
 			fill[i] = knobValue;

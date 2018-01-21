@@ -23,14 +23,14 @@ public class AddAndLevel : mono
 
 	public LevelMode levelMode = LevelMode.safeLevel;
 
-	public override float[] getSignal(int length)
+	public override float[] getSignal(List<bool[]> doneBoxes, int length)
 	{
 
 		fill = new float[length];
 		float[][] sources = new float[inputs.Length][];
 		for (int i = 0; i < inputs.Length; i++)
 		{
-			sources[i] = inputs[i].getSignal(length);
+			sources[i] = inputs[i].gibSignal(doneBoxes, length);
 		}
 		for (int i = 0; i < length; i++)
 		{

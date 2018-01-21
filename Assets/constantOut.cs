@@ -5,7 +5,7 @@ using UnityEngine;
 public class constantOut :  mono {
 
     public float value;
-    public override float[] getSignal(int length)
+    public override float[] getSignal(List<bool[]> doneBoxes, int length)
     {
         fill = new float[length];
         

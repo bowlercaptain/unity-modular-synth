@@ -7,7 +7,7 @@ public class delayFilter : mono
 {
 
 	public mono input;
-	public float wetDry;
+	public mono wetDry;
 	public float delay;
 
 	private float[] tape = new float[1024];
@@ -18,18 +18,19 @@ public class delayFilter : mono
 		tape = new float[Mathf.RoundToInt(info.sampleRate * delay)];
 	}
 
-	public override float[] getSignal(int length)
+	public override float[] getSignal(List<bool[]> doneBoxes, int length)
 	{
 		fill = new float[length];
-		var datt = input.getSignal(length);
+		var datt = input.gibSignal(doneBoxes, length);
+		var wetDryDat = wetDry.gibSignal(doneBoxes, length);
 		for (int i = 0; i < length; i++)
-		{//if length ever changes this breaks! But it doesn't, so...
-			fill[i] = fuckSample(datt[i]);
+		{
+			fill[i] = fuckSample(datt[i], wetDryDat[i]);
 		}
 		return fill;
 	}
 
-	public float fuckSample(float sample)
+	public float fuckSample(float sample, float wetDry)
 	{
 		sample += tape[j] * wetDry;
 		if(float.IsNaN(sample)) { sample = 0; }

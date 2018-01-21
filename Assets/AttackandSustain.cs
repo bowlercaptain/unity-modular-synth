@@ -12,10 +12,10 @@ public class AttackandSustain :  mono {
 	public float sustainTime;
 
 	private float current;
-	public override float[] getSignal(int length)
+	public override float[] getSignal(List<bool[]> doneBoxes, int length)
 	{
-		fill = new float[length];//todo: these lines making new arrays may be unnecessary, since length doesn't change.
-		float[] datt = input.getSignal(length);
+		fill = new float[length];
+		float[] datt = input.gibSignal(doneBoxes, length);
 		for(int i = 0; i < datt.Length; i++) {
 			if (datt[i] > current)
 			{

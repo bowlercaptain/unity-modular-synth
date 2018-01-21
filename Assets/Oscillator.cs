@@ -27,13 +27,12 @@ public abstract class Oscillator : mono {
 
     public mono volume;
 
-    public override float[] getSignal(int length)
-    {
+	public override float[] getSignal(List<bool[]> doneBoxes, int length) {
 
-         fill = new float[length];
+		fill = new float[length];
 
-        float[] freqs = ((mono)frequency).getSignal(length);
-        float[] vols = ((mono)volume).getSignal(length);
+        float[] freqs = frequency.gibSignal(doneBoxes, length);
+        float[] vols = volume.gibSignal(doneBoxes, length);
         for (int i = 0; i < length; i++)
         {
             currentPos += freqs[i] / info.sampleRate;

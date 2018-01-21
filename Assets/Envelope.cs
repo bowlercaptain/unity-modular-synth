@@ -31,7 +31,7 @@ public class Envelope : mono
 		sample = 0;
 	}
 
-	public override float[] getSignal(int length)
+	public override float[] getSignal(List<bool[]> doneBoxes, int length)
 	{
 		fill = new float[length];
 		int i = 0;

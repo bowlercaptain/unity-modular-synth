@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MidiJack;
 
-public class CuatomMapNoteControl : NoteControl {
+public class CustomMapNoteControl : NoteControl {
 
 	[System.Serializable]
 	public class noteMap

@@ -13,9 +13,9 @@ public class ResamplerSpeedShifter : mono
 	private float tapePosition;
 	private float lastSample = 0f;
 
-	public override float[] getSignal(int length)
+	public override float[] getSignal(List<bool[]> doneBoxes, int length)
 	{
-		var ratte = rates.getSignal(length);
+		var ratte = rates.gibSignal(doneBoxes, length);
 		for (int i = 0; i < length; i++)
 		{
 			tapePosition += ratte[i];
@@ -23,9 +23,9 @@ public class ResamplerSpeedShifter : mono
 			{
 				lastSample = tape[tape.Length - 1];
 				tapePosition -= tape.Length;
-				tape = input.getSignal(Mathf.CeilToInt(length * ratte[i]));//or multiply by two here? kind of janks the consistent performance thing.
-				Debug.Log("New tape! Length " + tape.Length+" "+ratte[i]);
-				Debug.Log("new pos: " + tapePosition);
+				tape = input.gibSignal(doneBoxes, Mathf.CeilToInt(length * ratte[i]));//or multiply by two here? kind of janks the consistent performance thing.
+				//Debug.Log("New tape! Length " + tape.Length+" "+ratte[i]);
+				//Debug.Log("new pos: " + tapePosition);
 			}
 
 			int point = Mathf.FloorToInt(tapePosition - 1);

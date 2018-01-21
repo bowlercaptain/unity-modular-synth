@@ -10,10 +10,10 @@ public class RangeShifter : mono {
     public float outMin = 0f;
     public float outMax = 1f;
 
-    public override float[] getSignal(int length)
+    public override float[] getSignal(List<bool[]> doneBoxes, int length)
     {
         fill = new float[length];
-        float[] datt = ((mono)input).getSignal(length);
+        float[] datt = input.gibSignal(doneBoxes, length);
         for (int i = 0; i < datt.Length; i++)
         {
             fill[i] = (datt[i] - sourceMin) / (sourceMax - sourceMin) * (outMax - outMin) + outMin;
