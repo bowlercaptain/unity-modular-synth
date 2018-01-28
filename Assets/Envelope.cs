@@ -31,8 +31,7 @@ public class Envelope : mono
 		sample = 0;
 	}
 
-	public override float[] getSignal(List<bool[]> doneBoxes, int length)
-	{
+	protected override void getSignal(List<bool[]> doneBoxes) {
 		fill = new float[length];
 		int i = 0;
 		float attackSamples = (attackTime * info.sampleRate);
@@ -59,7 +58,5 @@ public class Envelope : mono
 		while (i < length) {
 			fill[i++]=0;
 		}
-		//Debug.Log("asd" + i);
-		return fill;
 	}
 }

@@ -33,7 +33,7 @@ public class SynthVisualizer : MonoBehaviour {
 	// Will be called after all regular rendering is done
 	public void OnRenderObject()
 	{
-		float[] heights = ((mono)toShow).fill;
+		float[] heights = toShow.fill;
 		CreateLineMaterial();
 		// Apply the line material
 		lineMaterial.SetPass(0);

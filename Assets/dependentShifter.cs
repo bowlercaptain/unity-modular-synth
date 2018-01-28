@@ -11,16 +11,15 @@ public class dependentShifter : mono {
 	public mono outMin;
 	public mono outMax;
 
-	public override float[] getSignal(List<bool[]> doneBoxes, int length) {
+	protected override void getSignal(List<bool[]> doneBoxes) {
 		fill = new float[length];
-		float[] datt = input.gibSignal(doneBoxes, length);
-		float[] inmins = sourceMin.gibSignal(doneBoxes, length);
-		float[] inmaxs = sourceMax.gibSignal(doneBoxes, length);
-		float[] outmins = outMin.gibSignal(doneBoxes, length);
-		float[] outmaxs = outMax.gibSignal(doneBoxes, length);
+		float[] datt = input.gibSignal(doneBoxes);
+		float[] inmins = sourceMin.gibSignal(doneBoxes);
+		float[] inmaxs = sourceMax.gibSignal(doneBoxes);
+		float[] outmins = outMin.gibSignal(doneBoxes);
+		float[] outmaxs = outMax.gibSignal(doneBoxes);
 		for (int i = 0; i < datt.Length; i++) {
 			fill[i] = (datt[i] - inmins[i]) / (inmaxs[i] - inmins[i]) * (outmaxs[i] - outmins[i]) + outmins[i];
 		}
-		return fill;
 	}
 }

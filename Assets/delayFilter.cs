@@ -18,16 +18,14 @@ public class delayFilter : mono
 		tape = new float[Mathf.RoundToInt(info.sampleRate * delay)];
 	}
 
-	public override float[] getSignal(List<bool[]> doneBoxes, int length)
-	{
+	protected override void getSignal(List<bool[]> doneBoxes) {
 		fill = new float[length];
-		var datt = input.gibSignal(doneBoxes, length);
-		var wetDryDat = wetDry.gibSignal(doneBoxes, length);
+		var datt = input.gibSignal(doneBoxes);
+		var wetDryDat = wetDry.gibSignal(doneBoxes);
 		for (int i = 0; i < length; i++)
 		{
 			fill[i] = fuckSample(datt[i], wetDryDat[i]);
 		}
-		return fill;
 	}
 
 	public float fuckSample(float sample, float wetDry)

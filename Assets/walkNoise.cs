@@ -21,18 +21,16 @@ public class walkNoise : mono {
 
     private System.Random mr = new System.Random();
 
-    public override float[] getSignal(List<bool[]> doneBoxes, int length)
-    {
+    protected override void getSignal(List<bool[]> doneBoxes) {
         fill = new float[length];
 
-        float[] widths = width.gibSignal(doneBoxes, length);
-		float[] vols = volume.gibSignal(doneBoxes, length);
+        float[] widths = width.gibSignal(doneBoxes);
+		float[] vols = volume.gibSignal(doneBoxes);
 
         for (int i = 0; i < length; i++)
         {
             lastVal = Mathf.Clamp(lastVal+((float)mr.NextDouble()*2f-1f)*widths[i],-1f, 1f);
             fill[i] = lastVal * vols[i];
         }
-        return fill;
     }
 }

@@ -6,22 +6,27 @@ public abstract class mono : MonoBehaviour {
 
 	public float[] fill = new float[1024];
 	private bool[] doneBox = { false };
+	protected int length;
 
-	public float[] gibSignal(List<bool[]> doneBoxes, int length) {
-		if (doneBox[0]) {
-			return fill;
-		} else {
+	public float[] gibSignal(List<bool[]> doneBoxes) {
+		if (!doneBox[0]) {
 			doneBox[0] = true;
 			doneBoxes.Add(doneBox);
-			return getSignal(doneBoxes, length);
+			getSignal(doneBoxes);
 		}
+		return fill;
 	}
 
 	/// <summary>
-	/// 
+	/// build "fill" to length
 	/// </summary>
 	/// <param name="length"></param>
 	/// <returns>A float array </returns>
-	abstract public float[] getSignal(List<bool[]> doneBoxes, int length);//nobody else should ever call this
+	abstract protected void getSignal(List<bool[]> doneBoxes);//nobody else should ever call this
+
+	public virtual void setLength(int length) {
+		fill = new float[length];
+		this.length = length;
+	}
 
 }

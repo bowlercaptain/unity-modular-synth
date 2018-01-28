@@ -12,10 +12,9 @@ public class AttackandSustain :  mono {
 	public float sustainTime;
 
 	private float current;
-	public override float[] getSignal(List<bool[]> doneBoxes, int length)
-	{
+	protected override void getSignal(List<bool[]> doneBoxes) {
 		fill = new float[length];
-		float[] datt = input.gibSignal(doneBoxes, length);
+		float[] datt = input.gibSignal(doneBoxes);
 		for(int i = 0; i < datt.Length; i++) {
 			if (datt[i] > current)
 			{
@@ -29,7 +28,5 @@ public class AttackandSustain :  mono {
 			}
 			fill[i] = current;
 		}
-
-			return fill;
 	}
 }

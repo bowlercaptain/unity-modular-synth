@@ -9,16 +9,14 @@ public class whiteNoise : mono {
 
 	private System.Random mr = new System.Random();
 
-public override float[] getSignal(List<bool[]> doneBoxes, int length)
-    {
+protected override void getSignal(List<bool[]> doneBoxes) {
         fill = new float[length];
-		float[] vols = volume.gibSignal(doneBoxes, length);
+		float[] vols = volume.gibSignal(doneBoxes);
 
         for (int i = 0; i < length; i++)
         {
 
             fill[i] = vols[i]*(float)mr.NextDouble()*2f-1f;
         }
-        return fill;
     }
 }

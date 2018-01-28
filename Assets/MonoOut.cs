@@ -10,7 +10,7 @@ public class MonoOut : MonoBehaviour {
     private void OnAudioFilterRead(float[] data, int channels)
     {
 		List<bool[]> doneBoxes = new List<bool[]>() ;
-        var datta = input.gibSignal(doneBoxes, data.Length / channels);
+        var datta = input.gibSignal(doneBoxes);
 		foreach (var box in doneBoxes) { box[0] = false; }
         for(int i = 0; i < data.Length/channels; i++)
         {

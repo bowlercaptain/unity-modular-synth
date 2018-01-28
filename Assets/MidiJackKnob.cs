@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using MidiJack;
 
-public class knobOutput : mono {
+public class MidiJackKnob : mono {
 
     public MidiChannel channel;
     public int knobNumber;
     float knobValue = .5f;
 
-    public override float[] getSignal(List<bool[]> doneBoxes, int length)
-    {
+    protected override void getSignal(List<bool[]> doneBoxes) {
         for (int i = 0; i < length; i++)
         {
             fill[i] = knobValue;
         }
-        return fill;
     }
 
     void Knob(MidiChannel channel, int knobNumber, float knobValue)
