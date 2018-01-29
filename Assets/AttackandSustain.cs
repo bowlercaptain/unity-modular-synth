@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class AttackandSustain :  mono {
 
-	public mono input;
+	public mono input{
+get{return monoInputs[0];}
+set{monoInputs[0]=value;}
+}
 	
 
 	public float attackTime;
@@ -29,4 +32,5 @@ public class AttackandSustain :  mono {
 			fill[i] = current;
 		}
 	}
+public override int getNumMonos(){ return(1); }
 }

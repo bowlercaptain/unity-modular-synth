@@ -8,6 +8,9 @@ public abstract class mono : MonoBehaviour {
 	private bool[] doneBox = { false };
 	protected int length;
 
+	public mono[] monoInputs = new mono[0];
+	public Knob[] knobInputs = new Knob[0];
+
 	public float[] gibSignal(List<bool[]> doneBoxes) {
 		if (!doneBox[0]) {
 			doneBox[0] = true;
@@ -28,5 +31,6 @@ public abstract class mono : MonoBehaviour {
 		fill = new float[length];
 		this.length = length;
 	}
-
+	public virtual int getNumMonos() { return 0; }
+	public virtual int getNumKnobs() { return 1; }
 }

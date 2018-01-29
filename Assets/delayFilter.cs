@@ -6,8 +6,14 @@ using UnityEngine;
 public class delayFilter : mono
 {
 
-	public mono input;
-	public mono wetDry;
+	public mono input{
+get{return monoInputs[0];}
+set{monoInputs[0]=value;}
+}
+	public mono wetDry{
+get{return monoInputs[1];}
+set{monoInputs[1]=value;}
+}
 	public float delay;
 
 	private float[] tape = new float[1024];
@@ -37,4 +43,5 @@ public class delayFilter : mono
 		if (j >= tape.Length) { j = 0; }
 		return sample;
 	}
+public override int getNumMonos(){ return(2); }
 }

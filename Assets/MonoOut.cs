@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MonoOut : MonoBehaviour {
 
-    public mono input;
-
+    public mono input{
+get{return monoInputs[0];}
+set{monoInputs[0]=value;}
+}
 
     private void OnAudioFilterRead(float[] data, int channels)
     {
@@ -20,7 +22,5 @@ public class MonoOut : MonoBehaviour {
             }
         }
     }
-
-
-
+public override int getNumMonos(){ return(1); }
 }

@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class walkNoise : mono {
 
-    public mono width;
+    public mono width{
+get{return monoInputs[0];}
+set{monoInputs[0]=value;}
+}
 
-	public mono volume;
+	public mono volume{
+get{return monoInputs[1];}
+set{monoInputs[1]=value;}
+}
 
 	private void Awake()
 	{
@@ -33,4 +39,5 @@ public class walkNoise : mono {
             fill[i] = lastVal * vols[i];
         }
     }
+public override int getNumMonos(){ return(2); }
 }

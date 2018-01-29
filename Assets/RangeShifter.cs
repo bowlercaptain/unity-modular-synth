@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class RangeShifter : mono {
 
-    public mono input;
+    public mono input{
+get{return monoInputs[0];}
+set{monoInputs[0]=value;}
+}
     public float sourceMin = -1f;
     public float sourceMax = 1f;
     public float outMin = 0f;
@@ -19,4 +22,5 @@ public class RangeShifter : mono {
         }
     }
 
+public override int getNumMonos(){ return(1); }
 }

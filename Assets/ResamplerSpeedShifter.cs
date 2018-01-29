@@ -6,8 +6,14 @@ using UnityEngine;
 public class ResamplerSpeedShifter : mono
 {
 
-	public mono input;
-	public mono rates;
+	public mono input{
+get{return monoInputs[0];}
+set{monoInputs[0]=value;}
+}
+	public mono rates{
+get{return monoInputs[1];}
+set{monoInputs[1]=value;}
+}
 
 	private float[] tape = new float[1];
 	private float tapePosition;
@@ -43,4 +49,5 @@ public class ResamplerSpeedShifter : mono
 	public override void setLength(int length) {//TODO: stuffffffffffffffffffffffffffffff with this e.g. make one that rejiggers dependent stuffs and uses knob for speed?
 		base.setLength(length);
 	}
+public override int getNumMonos(){ return(2); }
 }

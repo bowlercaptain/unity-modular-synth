@@ -5,7 +5,10 @@ using UnityEngine;
 public class curveShifter :  mono {
 
     public AnimationCurve curve;
-    public mono input;
+    public mono input{
+get{return monoInputs[0];}
+set{monoInputs[0]=value;}
+}
     // Use this for initialization
     protected override void getSignal(List<bool[]> doneBoxes) {
         fill = new float[length];
@@ -15,4 +18,5 @@ public class curveShifter :  mono {
             fill[i] = curve.Evaluate(datt[i]);
         }
     }
+public override int getNumMonos(){ return(1); }
 }

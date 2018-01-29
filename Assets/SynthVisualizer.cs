@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class SynthVisualizer : MonoBehaviour {
 
-	public mono toShow;
+	public mono toShow{
+get{return monoInputs[0];}
+set{monoInputs[0]=value;}
+}
 
 	// When added to an object, draws colored rays from the
 	// transform position.
@@ -59,4 +62,5 @@ public class SynthVisualizer : MonoBehaviour {
 		GL.End();
 		GL.PopMatrix();
 	}
+public override int getNumMonos(){ return(1); }
 }

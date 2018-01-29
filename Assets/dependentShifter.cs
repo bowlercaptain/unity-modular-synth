@@ -5,11 +5,26 @@ using UnityEngine;
 
 public class dependentShifter : mono {
 
-	public mono input;
-	public mono sourceMin;
-	public mono sourceMax;
-	public mono outMin;
-	public mono outMax;
+	public mono input{
+get{return monoInputs[0];}
+set{monoInputs[0]=value;}
+}
+	public mono sourceMin{
+get{return monoInputs[1];}
+set{monoInputs[1]=value;}
+}
+	public mono sourceMax{
+get{return monoInputs[2];}
+set{monoInputs[2]=value;}
+}
+	public mono outMin{
+get{return monoInputs[3];}
+set{monoInputs[3]=value;}
+}
+	public mono outMax{
+get{return monoInputs[4];}
+set{monoInputs[4]=value;}
+}
 
 	protected override void getSignal(List<bool[]> doneBoxes) {
 		fill = new float[length];
@@ -22,4 +37,5 @@ public class dependentShifter : mono {
 			fill[i] = (datt[i] - inmins[i]) / (inmaxs[i] - inmins[i]) * (outmaxs[i] - outmins[i]) + outmins[i];
 		}
 	}
+public override int getNumMonos(){ return(5); }
 }

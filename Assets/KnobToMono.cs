@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class KnobToMono : mono {
 
-	public Knob input;
+	public Knob input{
+get{return KnobInputs[0];}
+set{KnobInputs[0]=value;}
+}
 
 	protected override void getSignal(List<bool[]> doneBoxes) {
 	float val = input.Value();
@@ -13,4 +16,5 @@ public class KnobToMono : mono {
 			fill[i] = val;
 		}
 	}
+public override int getNumKnobs(){ return(1); }
 }

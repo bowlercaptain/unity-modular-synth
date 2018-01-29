@@ -23,9 +23,15 @@ public abstract class Oscillator : mono {
 
     float currentPos;
 
-    public mono frequency;
+    public mono frequency{
+get{return monoInputs[0];}
+set{monoInputs[0]=value;}
+}
 
-    public mono volume;
+    public mono volume{
+get{return monoInputs[1];}
+set{monoInputs[1]=value;}
+}
 
 	protected override void getSignal(List<bool[]> doneBoxes) {
 
@@ -41,4 +47,5 @@ public abstract class Oscillator : mono {
         while (currentPos > 1f) { currentPos -= 1f; }
         while (currentPos < -1f) { currentPos += 1f; }
     }
+public override int getNumMonos(){ return(2); }
 }
