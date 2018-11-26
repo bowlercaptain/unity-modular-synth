@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class SynthVisualizer : MonoBehaviour {
 
-	public mono toShow{
-get{return monoInputs[0];}
-set{monoInputs[0]=value;}
-}
+    public mono toShow;
 
-	// When added to an object, draws colored rays from the
-	// transform position.
-	
+    // When added to an object, draws colored rays from the
+    // transform position.
 
-	static Material lineMaterial;
+    public void Awake()
+    {
+        CreateLineMaterial();
+    }
+
+    static Material lineMaterial;
 	static void CreateLineMaterial()
 	{
 		if (!lineMaterial)
@@ -37,7 +38,7 @@ set{monoInputs[0]=value;}
 	public void OnRenderObject()
 	{
 		float[] heights = toShow.fill;
-		CreateLineMaterial();
+		//CreateLineMaterial();
 		// Apply the line material
 		lineMaterial.SetPass(0);
 		
@@ -62,5 +63,45 @@ set{monoInputs[0]=value;}
 		GL.End();
 		GL.PopMatrix();
 	}
-public override int getNumMonos(){ return(1); }
+
+
+    LineRenderer[] wires;
+    private void Start()
+    {
+        DrawWires();
+
+    }
+
+    void DrawWires()
+    {
+        foreach (var wire in wires)
+        {
+            ReturnWire(wire);
+        }
+        wires = new LineRenderer[toShow.getNumMonos()];
+        for (int i = 0; i < toShow.monoInputs.Length; i++)
+        {
+            wires[i].SetPositions(new Vector3[]{ transform.position, toShow.monoInputs[i].transform.position});
+        }
+    }
+
+    static void ReturnWire(LineRenderer wire) { wire.enabled = false; wirePool.Enqueue(wire); }
+
+    static Queue<LineRenderer> wirePool = new Queue<LineRenderer>();
+    static LineRenderer getWire()
+    {
+        if (wirePool.Count > 0)
+        {
+
+            var wire = wirePool.Dequeue();
+            wire.enabled = true;
+            return wire;
+        } else
+        {
+            var lr = new GameObject();
+            return lr.AddComponent<LineRenderer>();
+        }
+    }
+
+
 }

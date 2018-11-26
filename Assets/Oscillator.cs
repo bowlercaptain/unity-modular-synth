@@ -47,5 +47,5 @@ set{monoInputs[1]=value;}
         while (currentPos > 1f) { currentPos -= 1f; }
         while (currentPos < -1f) { currentPos += 1f; }
     }
-public override int getNumMonos(){ return(2); }
+
 }

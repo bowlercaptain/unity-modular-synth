@@ -49,5 +49,4 @@ set{monoInputs[1]=value;}
 	public override void setLength(int length) {//TODO: stuffffffffffffffffffffffffffffff with this e.g. make one that rejiggers dependent stuffs and uses knob for speed?
 		base.setLength(length);
 	}
-public override int getNumMonos(){ return(2); }
 }

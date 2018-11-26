@@ -32,5 +32,5 @@ set{monoInputs[0]=value;}
 			fill[i] = current;
 		}
 	}
-public override int getNumMonos(){ return(1); }
+
 }

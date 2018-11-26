@@ -39,5 +39,4 @@ set{monoInputs[1]=value;}
             fill[i] = lastVal * vols[i];
         }
     }
-public override int getNumMonos(){ return(2); }
 }

@@ -18,5 +18,5 @@ set{monoInputs[0]=value;}
             fill[i] = curve.Evaluate(datt[i]);
         }
     }
-public override int getNumMonos(){ return(1); }
+
 }

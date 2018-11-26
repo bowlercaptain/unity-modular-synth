@@ -12,5 +12,5 @@ set{monoInputs[0]=value;}
 	protected override void getSignal(List<bool[]> doneBoxes) {
 		fill = source.gibSignal(doneBoxes);
 	}
-public override int getNumMonos(){ return(1); }
+
 }

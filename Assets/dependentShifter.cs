@@ -37,5 +37,5 @@ set{monoInputs[4]=value;}
 			fill[i] = (datt[i] - inmins[i]) / (inmaxs[i] - inmins[i]) * (outmaxs[i] - outmins[i]) + outmins[i];
 		}
 	}
-public override int getNumMonos(){ return(5); }
+
 }

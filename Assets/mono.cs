@@ -31,6 +31,6 @@ public abstract class mono : MonoBehaviour {
 		fill = new float[length];
 		this.length = length;
 	}
-	public virtual int getNumMonos() { return 0; }
-	public virtual int getNumKnobs() { return 1; }
+	public int getNumMonos() { return monoInputs.Length; }
+	public int getNumKnobs() { return knobInputs.Length; ; }
 }

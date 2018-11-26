@@ -24,5 +24,5 @@ set{monoInputs[0]=value;}
 		return Mathf.Round(sample / minReach) * minReach;//todo: create a base offset so you can do .5,1.5,2.5 instead of always centering at 0.
 	}
 
-public override int getNumMonos(){ return(1); }
+
 }

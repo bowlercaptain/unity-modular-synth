@@ -7,6 +7,6 @@ public class TriOscillator : Oscillator
 {
     public override float waveFunction(float position)
     {
-        return Mathf.Abs((position * 2 + 1f) % 2f - 1f);
+        return Mathf.Abs((position * 2 + 1f) % 2f - 1f)-.5f;
     }
 }

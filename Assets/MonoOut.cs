@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MonoOut : MonoBehaviour {
 
+    public mono[] monoInputs;
+
     public mono input{
 get{return monoInputs[0];}
 set{monoInputs[0]=value;}
@@ -22,5 +24,4 @@ set{monoInputs[0]=value;}
             }
         }
     }
-public override int getNumMonos(){ return(1); }
 }

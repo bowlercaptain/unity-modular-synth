@@ -6,8 +6,8 @@ using UnityEngine;
 public class KnobToMono : mono {
 
 	public Knob input{
-get{return KnobInputs[0];}
-set{KnobInputs[0]=value;}
+get{return knobInputs[0];}
+set{ knobInputs[0]=value;}
 }
 
 	protected override void getSignal(List<bool[]> doneBoxes) {
@@ -16,5 +16,4 @@ set{KnobInputs[0]=value;}
 			fill[i] = val;
 		}
 	}
-public override int getNumKnobs(){ return(1); }
 }

@@ -1,0 +1,41 @@
+spawn a component based on a string (id, name etc)
+component will have a given number of inputs
+
+sin(0) echo(1,const(50),logconst(.7)=.5) echo(2,1,1) constant()[50] constant[.5f] | 5
+
+generating constants should be (+1) log (random(0to1excl) 
+
+fundamental wavemakers
+sin(freq)
+square(freq)
+saw(freq)
+
+utils
+shifter(inlow,inhigh,outlow,outhigh)
+round (val,resolution?,centerpoint??) = bitcrusher//centerpoint won't change much most of the time
+eq(input,vals...)
+
+{ stack(0) effect(1) | 2} { otherstack(0) | 1} effect(0,1) | 2 // midi in to stack(0) and otherstack(1), outputs are 0 and 1 of final stack
+
+{ sin(0) | 1} { shifter(0,constant(0),constant(1),constant(0),constant(2)) | 1 } { shifter(0,constant(0),constant(1),constant(0),constant(.5)) | 1 } mix(0,1,const(.5)) mix(3,2,const(.666f)) | 4 // triple sin osc
+
+
+sighted substacks (internal outputs, external outputs)
+oscillator|effects
+
+blinded/protected substack:
+resampler (outputthatIsConstant) | effectsss
+
+hypnotoad button
+[walkNoise(const(.5))/*=brown noise*/ delay(1,const(something)) delay(2,const(somethingElse) eq(stuff) | thatEq]-resample(0) | 1 //hypnotoad button
+
+generate a stack:
+generator chooses number of components
+choose each component type
+[
+component can be sighted substack -> pass in number of outer components to add to length when generating new stack
+component can be blind substack -> just generate a new stack
+component can be not a stack
+]
+each component chooses inputs from available references or consts ( +- log(rand) )
+choose output reference (not a constant?) from components (not 0?)

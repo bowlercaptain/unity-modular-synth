@@ -22,5 +22,4 @@ set{monoInputs[0]=value;}
         }
     }
 
-public override int getNumMonos(){ return(1); }
 }

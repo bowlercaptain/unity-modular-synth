@@ -43,5 +43,5 @@ set{monoInputs[1]=value;}
 		if (j >= tape.Length) { j = 0; }
 		return sample;
 	}
-public override int getNumMonos(){ return(2); }
+
 }
